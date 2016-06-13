@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 class Live{
 	int reading[];
-	int sensors = 5;
+	int sensors = 5 ;
 
 	public Live(){
 		reading = new int [sensors];

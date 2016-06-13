@@ -6,8 +6,8 @@ class Gesture{
 	public int up = 60;
 	public int lr = 200;
 
-	public Gesture(int snsrs, int pts){
-		dataPoints = pts; sensors = snsrs;
+	public Gesture(int numberOfSensors, int points){
+		dataPoints = points; sensors = numberOfSensors;
 		eFrame = new int [sensors] [][];
 		for (int i=0; i<sensors; i++) {
 			eFrame[i] = new int [dataPoints][];

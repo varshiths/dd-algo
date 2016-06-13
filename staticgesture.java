@@ -1,23 +1,25 @@
-class Frame{
-	int u;
-	int l;
+public class Frame{
+	private int upperbound;
+	private int lowerbound;
 
 	public Frame(int up, int lr){
-		u = up; l = lr;
+		upperbound = up; 
+		lowerbound = lr;
 	}
 
 	public void pushLimits(int []d){
-		d[0] = u;
-		d[1] = l;
+		d[0] = upperbound;
+		d[1] = lowerbound;
 	}
 
 	public void print(){
-		System.out.print(u); System.out.print(' ');
-		System.out.println(l);
+		System.out.print(upperbound);
+		System.out.print(' ');
+		System.out.println(lowerbound);
 	}
 }
 
-class StaticGesture extends Gesture{
+class StaticGesture extends Gesture {
 
 	public StaticGesture(int snsrs, int pts){
 		super(snsrs,pts);
