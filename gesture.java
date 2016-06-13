@@ -38,7 +38,18 @@ class Gesture{
 		System.out.println("Updating frame...");
 	}
 
-	public void execute(){
+	public boolean isInFrame(Live live){
+		for (int i=0; i<sensors; i++) {
+			if(!((eFrame[i][0][0]<live.reading[i]) && (live.reading[i]<eFrame[i][0][1]))){
+				return false;
+			} 
+		}
+		return true;
+	}
+
+	public void execute(int gest){
 		// perform system function
+		System.out.println(gest);
+		//System.console().readLine();
 	}
 }

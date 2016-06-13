@@ -1,3 +1,42 @@
+import java.util.Scanner;
+
+class Live{
+	int reading[];
+	int sensors = 5;
+
+	public Live(){
+		reading = new int [sensors];
+	}
+
+	public Live(Live live){
+		reading = new int [live.sensors];
+		for (int i=0; i<sensors; i++) {
+			reading[i] = live.reading[i];
+		}
+	}
+
+	public void update(){
+		for (int i=0; i<sensors; i++) {
+			reading[i] = 100;
+		}
+	}
+
+	public void updateConsole(){
+		Scanner scan = new Scanner(System.in).useDelimiter("\\s");
+		for (int i=0; i<sensors; i++) {
+			reading[i] = scan.nextInt();
+		}
+	}
+
+	public void print(){
+		for (int i=0; i<sensors; i++) {
+			System.out.print(reading[i] + " ");
+		}
+		System.out.print('\n');
+	}
+
+}
+
 class Prime{
 	public static void main(String [] args){
 		
@@ -40,11 +79,46 @@ class Prime{
 		// music play
 		a[q].updateFrame(fing);
 
-		for (int i=0; i<8; i++) {
+		/*for (int i=0; i<8; i++) {
 			System.out.println(i);
 			a[i].printData();
+		}*/
+		
+		Live live = new Live();
+		int no = 2;
+		//live.print();
+		int count = 0;
+		int gestActive = -1; boolean stay = true;
+				
+		while(stay){
+
+			if(count == no){
+				a[gestActive].execute(gestActive);
+				count = 0;
+				gestActive = -1;
+				System.out.print("Continue? ");
+				Scanner contd = new Scanner(System.in);
+				String str = contd.next();
+				if( str.equals("n") ) { stay = false; break; }
+			}
+
+			if(count<no){
+				live.updateConsole();
+			}
+
+			for (int i=0; i<8; i++) {
+				if(a[i].isInFrame(live)){
+					if(gestActive == i){
+						count++; continue;
+					}
+					else{
+						gestActive = i; count = 1; continue;
+					}
+				}
+			}
+
 		}
 		
-		
+
 	}
 }
