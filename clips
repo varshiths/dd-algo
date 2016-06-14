@@ -4,3 +4,13 @@
 
 	for (int i=0; i<5; i++) {
 		live[i] = new int [] {a,b};
+
+			for (int i=0; i<sensors; i++) {
+			f[i] = new Frame(adcUp + i*((adcLr-adcUp)/adcLevels), adcUp + (i+1)*((adcLr-adcUp)/adcLevels));
+			//f[i].print();
+		}
+
+		Frame []g = new Frame[mpuLevels];
+		for (int i=0; i; ) {
+			
+		}

@@ -1,55 +1,44 @@
 class Gesture{
-	public int dataPoints;
-	public int sensors;
-	public int [][][] eFrame;
-	public int levels = 2;
-	public int up = 60;
-	public int lr = 200;
 
-	public Gesture(int numberOfSensors, int points){
-		dataPoints = points; sensors = numberOfSensors;
-		eFrame = new int [sensors] [][];
-		for (int i=0; i<sensors; i++) {
-			eFrame[i] = new int [dataPoints][];
-			for (int j=0; j<dataPoints; j++) {
-				eFrame[i][j] = new int [2];
-				/*for (int k=0; k<2; k++) {
-					eFrame[i][j][k] = new int();
-				}*/
-			}
-		}
-	}
+	public int dataPoints = 15;
+	public int sensors = 11;
+	public int adcLevels = 2;
+	public int adcUpper = 60;
+	public int adcLower = 200;
+	public int mpuLevels = 3;
+	public int mpuUpper = 18000;
+	public int mpuLower = -18000;
+
+	public Gesture(){}
 
 	public void printData(){
-		for (int i=0; i<sensors; i++) {
-			for (int j=0; j<dataPoints; j++) {
-					System.out.print(eFrame[i][j][0]);
-					System.out.print(eFrame[i][j][1] + " ");
-			}
-			System.out.print('\n');
-		}
+		System.out.println("Printing data...");
+	}
+
+	public void updateFrame(int [][] sensorLimits){
+		System.out.println("Updating static frame...");
 	}
 
 	public void updateFrame(int [][][] sensorLimits){
-		System.out.println("Updating frame...");
+		System.out.println("Updating dynamic frame...");
 	}
 
 	public void updateFrame(int []fing){
-		System.out.println("Updating frame...");
+		System.out.println("Updating frame for real...");
 	}
 
 	public boolean isInFrame(Live live){
-		for (int i=0; i<sensors; i++) {
-			if(!((eFrame[i][0][0]<live.reading[i]) && (live.reading[i]<eFrame[i][0][1]))){
-				return false;
-			} 
-		}
+		System.out.println("Checking if the value is in the static frame...");
+		return true;
+	}
+
+	public boolean isInFrame(Live live, int index){
+		System.out.println("Checking if the value is in the dynamic frame...");
 		return true;
 	}
 
 	public void execute(int gest){
 		// perform system function
 		System.out.println(gest);
-		//System.console().readLine();
 	}
 }

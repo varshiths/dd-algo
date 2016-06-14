@@ -1,69 +1,77 @@
-public class Frame{
-	private int upperbound;
-	private int lowerbound;
-
-	public Frame(int up, int lr){
-		upperbound = up; 
-		lowerbound = lr;
-	}
-
-	public void pushLimits(int []d){
-		d[0] = upperbound;
-		d[1] = lowerbound;
-	}
-
-	public void print(){
-		System.out.print(upperbound);
-		System.out.print(' ');
-		System.out.println(lowerbound);
-	}
-}
-
 class StaticGesture extends Gesture {
 
-	public StaticGesture(int snsrs, int pts){
-		super(snsrs,pts);
+	public int [][] eFrame;
+
+	public StaticGesture(){
+		eFrame = new int [sensors] [];
+		for (int i=0; i<sensors; i++) {
+			eFrame[i] = new int [2];
+		}
 	}
 
-	public void updateFrame(int [][][] sensorLimits){
+	public void printData(){
+		
+		for (int i=0; i<5; i++) {
+			String text = String.format("%03d", eFrame[i][0]);
+			System.out.print(text);
+			System.out.print(" ");
+		}
+		for (int i=5; i<sensors; i++) {
+			if(eFrame[i][1]<0) System.out.print(" ");
+			String text = String.format("%05d", eFrame[i][0]);
+			System.out.print(text);
+			System.out.print(" ");
+		}
+			System.out.print('\n');
+
+		for (int i=0; i<5; i++) {
+			String text = String.format("%03d", eFrame[i][1]);
+			System.out.print(text);
+			System.out.print(" ");
+		}
+		for (int i=5; i<sensors; i++) {
+			String text = String.format("%05d", eFrame[i][1]);
+			System.out.print(text);
+			System.out.print(" ");
+		}
+			System.out.print('\n');
+	
+	}
+
+	public void updateFrame(int [][] sensorLimits){
 		//super.updateFrame(sensorLimits);
 		for (int i=0; i<sensors; i++) {
-			for (int j=0; j<dataPoints; j++) {
-				for (int k=0; k<2; k++) {
-					eFrame[i][j][k] = sensorLimits[i][j][k];
-				}
+			for (int j=0; j<2; j++) {
+				eFrame[i][j] = sensorLimits[i][j];
 			}
 		}
 	}
 
-	public void updateFrame(int []fing){
+	public void updateFrame(int []hand){
 
-		Frame []f = new Frame[levels];
+		int [][]data = new int [sensors][2];
+		
+		Frame []f = new Frame[sensors];
 
-		for (int i=0; i<levels; i++) {
-			f[i] = new Frame(up + i*((lr-up)/levels),up + (i+1)*((lr-up)/levels));
-			//f[i].print();
+		for (int i=0; i<5; i++) {
+			f[i] = new Frame(hand[i], false, adcUpper, adcLower, 2);
 		}
-		int [][][]data = new int [sensors][dataPoints][2];
-		//int q; int []fing = {0,0,0,0,0};
-		//fing = new int[] {0,0,0,0,0};
-		// data[q] : data for neutral
-		for (int j=0; j<dataPoints; j++) {
-			for (int i=0; i<sensors; i++) {
-				f[fing[i]].pushLimits(data[i][j]);
-			}
+		for (int i=5; i<sensors; i++) {
+			f[i] = new Frame(hand[i], true, mpuUpper, mpuLower, 3);
+		}
+
+		for (int i=0; i<sensors; i++) {
+			f[i].pushLimits(data[i]);
 		}
 
 		this.updateFrame(data);
 	}
 
-	public void printData(){
-		for (int i=0; i<sensors; i++) {
-	//		for (int j=0; j<dataPoints; j++) {
-					System.out.print(eFrame[i][0][0] + " ");
-					System.out.print(eFrame[i][0][1]);
-	//		}
-			System.out.print('\n');
+	public boolean isInFrame(Live live){for (int i=0; i<sensors; i++) {
+			if(!((eFrame[i][0]<live.reading[i]) && (live.reading[i]<eFrame[i][1]))){
+				return false;
+			} 
 		}
+		return true;
 	}
 }

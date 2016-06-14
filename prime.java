@@ -2,20 +2,20 @@ import java.util.Scanner;
 
 class Live{
 	int reading[];
-	int sensors = 5 ;
+	int sensors = 11 ;
 
 	public Live(){
 		reading = new int [sensors];
 	}
 
-	public Live(Live live){
-		reading = new int [live.sensors];
+	public Live(Live staticLive){
+		reading = new int [staticLive.sensors];
 		for (int i=0; i<sensors; i++) {
-			reading[i] = live.reading[i];
+			reading[i] = staticLive.reading[i];
 		}
 	}
 
-	public void update(){
+	public void update100(){
 		for (int i=0; i<sensors; i++) {
 			reading[i] = 100;
 		}
@@ -42,51 +42,51 @@ class Prime{
 		
 		Gesture []a = new Gesture[8];
 		for (int i = 0; i<8; i++) {
-			a[i] = new StaticGesture(5,50);
+			a[i] = new StaticGesture();
 		}
 
-		int []fing = {0,0,0,0,0}; int q=0;
+		int []hand = {0,0,0,0,0,0,0,0,0,0,0}; int q=0;
 
-		q=0; fing = new int [] {0,0,0,0,0};
+		q=0; hand = new int [] {0,0,0,0,0,8,8,8,8,8,8};
 		// neutral
-		a[q].updateFrame(fing);
+		a[q].updateFrame(hand);
 
-		q=1; fing = new int [] {1,1,0,0,0};
+		q=1; hand = new int [] {1,1,0,0,0,8,8,8,8,1,8};
 		// voice search
-		a[q].updateFrame(fing);
+		a[q].updateFrame(hand);
 
-		q=2; fing = new int [] {1,0,1,1,1};
+		q=2; hand = new int [] {1,0,1,1,1,8,8,8,8,1,8};
 		// tap
-		a[q].updateFrame(fing);
+		a[q].updateFrame(hand);
 
-		q=3; fing = new int [] {0,1,1,1,0};
+		q=3; hand = new int [] {0,1,1,1,0,8,8,8,8,1,8};
 		// call
-		a[q].updateFrame(fing);
+		a[q].updateFrame(hand);
 
-		q=4; fing = new int [] {0,0,1,1,1};
+		q=4; hand = new int [] {0,0,1,1,1,8,8,8,-1,8,8};
 		// cam open
-		a[q].updateFrame(fing);
+		a[q].updateFrame(hand);
 
-		q=5; fing = new int [] {0,0,0,1,1};
+		q=5; hand = new int [] {0,0,0,1,1,8,8,8,-1,8,8};
 		// cam click
-		a[q].updateFrame(fing);
+		a[q].updateFrame(hand);
 
-		q=6; fing = new int [] {1,0,1,1,0};
+		q=6; hand = new int [] {1,0,1,1,0,8,8,8,8,1,8};
 		// music open
-		a[q].updateFrame(fing);
+		a[q].updateFrame(hand);
 
-		q=7; fing = new int [] {0,0,1,1,0};
+		q=7; hand = new int [] {0,0,1,1,0,8,8,8,8,1,8};
 		// music play
-		a[q].updateFrame(fing);
+		a[q].updateFrame(hand);
 
-		/*for (int i=0; i<8; i++) {
+		for (int i=0; i<2; i++) {
 			System.out.println(i);
 			a[i].printData();
-		}*/
-		
-		Live live = new Live();
+		}
+
+		Live staticLive = new Live();
 		int no = 2;
-		//live.print();
+		//StaticLive.print();
 		int count = 0;
 		int gestActive = -1; boolean stay = true;
 				
@@ -99,15 +99,15 @@ class Prime{
 				System.out.print("Continue? ");
 				Scanner contd = new Scanner(System.in);
 				String str = contd.next();
-				if( str.equals("n") ) { stay = false; break; }
+				//if( str.equals("n") ) { stay = false; break; }
 			}
 
 			if(count<no){
-				live.updateConsole();
+				staticLive.updateConsole();
 			}
 
 			for (int i=0; i<8; i++) {
-				if(a[i].isInFrame(live)){
+				if(a[i].isInFrame(staticLive)){
 					if(gestActive == i){
 						count++; continue;
 					}
