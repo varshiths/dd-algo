@@ -39,7 +39,7 @@ class DTW{
 
 		minAccDist[0][0] = distance[0][0];
 
-		int w = 4; // set window here
+		int w = 65536; // set window here
 		w=Math.max(w,Math.abs(m-n));
 
 		for (int i=1; i<Math.min(m,w); i++) {
@@ -98,8 +98,8 @@ class DTWoneD extends DTW {
 	public int []a; public int []b;
 
 	public void arrayInput(int []arr1, int []arr2){
-		m = arr1.length; n = arr2.length;
-		a = arr1; b = arr2;
+		a = arr1.clone(); b = arr2.clone();
+		m = a.length; n = b.length;
 	}
 
 	public void consoleInput(){
@@ -136,9 +136,9 @@ class DTWtwoD extends DTW {
 	public int dimSize = 0;
 
 	public void arrayInput(int [][]arr1, int [][]arr2){
-		m = arr1.length; n = arr2.length;
-		dimSize = arr1[0].length;
-		a = arr1; b = arr2;
+		a = arr1.clone(); b = arr2.clone();
+		m = a.length; n = b.length;
+		dimSize = a[0].length;
 	}
 
 	public double distance(int p, int q){
@@ -156,11 +156,11 @@ class DTWtwoD extends DTW {
 		minAccDistProcess();
 
 		int mini = 65536;
-		for (int i=0; i<b.length; i++) {
+		for (int i=0; i<a.length; i++) {
 			mini = Math.min(mini,minAccDist[i][n-1]);
 		}
 
-		arrayPrint(minAccDist);
+		//arrayPrint(minAccDist);
 
 		return mini;
 
