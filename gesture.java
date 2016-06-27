@@ -1,15 +1,19 @@
 class Gesture{
 
-	public int dataPoints = 15;
 	public int sensors = 11;
 	public int adcLevels = 2;
-	public int adcUpper = 60;
-	public int adcLower = 200;
+	public int adcUpper = 0;
+	public int adcLower = 100;
 	public int mpuLevels = 3;
 	public int mpuUpper = 18000;
 	public int mpuLower = -18000;
 
 	public Gesture(){}
+
+	public int[][] getPoint(){
+		int [][] dummy = new int[100][sensors];
+		return dummy;
+	}
 
 	public void printData(){
 		System.out.println("Printing data...");

@@ -14,3 +14,46 @@
 		for (int i=0; i; ) {
 			
 		}
+
+
+minAccDist = new int[m][n];
+
+		minAccDist[0][0] = distance[0][0];
+
+		int w = 4;
+		w=Math.max(w,Math.abs(m-n));
+
+		for (int i=1; i<Math.min(m,w); i++) {
+			minAccDist[i][0] = distance[i][0] + minAccDist[i-1][0];
+		}
+
+
+		for (int j=1; j<Math.min(n,w); j++) {
+			minAccDist[0][j] = distance[0][j] + minAccDist[0][j-1];
+		}
+
+		for (int i=1; i<m; i++) {
+			for (int j=Math.max(1,i-w); j<Math.min(n,i+w); j++) {
+				minAccDist[i][j] = distance[i][j] + Math.min( minAccDist[i-1][j-1], Math.min( minAccDist[i-1][j], minAccDist[i][j-1] ) );
+			}
+		}
+
+10 10
+0 1 2 3 2 1 0 2 4 7
+0 0 1 1 2 2 3 2 1 0
+
+
+	/*public boolean warpable(){
+		float tempMin = 65536;
+
+		for (int i=0; i<m; i++) {
+			tempMin = Math.min(minAccDist[i][n-1], tempMin);
+		}
+		for (int i=0; i<n; i++) {
+			tempMin = Math.min(minAccDist[m-1][i], tempMin);
+		}
+
+		System.out.println(tempMin);
+		if (tempMin == minAccDist[m-1][n-1]) return true;
+		else return false;
+	}*/

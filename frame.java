@@ -13,15 +13,20 @@ class Frame{
 		}
 		else{
 
-			upperBound =  lrBound - (index+2)*((lrBound-upBound)/levels);
-			lowerBound =  lrBound - (index+1)*((lrBound-upBound)/levels);
+			lowerBound =  lrBound - (index+2)*((lrBound-upBound)/levels);
+			upperBound =  lrBound - (index+1)*((lrBound-upBound)/levels);
 
 		}
 
 		if(index == 8){
-			upperBound = upBound;
-			lowerBound = lrBound;
-			return;
+			if(isMpu){
+				lowerBound = upBound;
+				upperBound = lrBound;
+			}
+			else{
+				upperBound = upBound;
+				lowerBound = lrBound;				
+			}
 		}
 		
 	}

@@ -1,42 +1,5 @@
 import java.util.Scanner;
 
-class Live{
-	int reading[];
-	int sensors = 11 ;
-
-	public Live(){
-		reading = new int [sensors];
-	}
-
-	public Live(Live staticLive){
-		reading = new int [staticLive.sensors];
-		for (int i=0; i<sensors; i++) {
-			reading[i] = staticLive.reading[i];
-		}
-	}
-
-	public void update100(){
-		for (int i=0; i<sensors; i++) {
-			reading[i] = 100;
-		}
-	}
-
-	public void updateConsole(){
-		Scanner scan = new Scanner(System.in).useDelimiter("\\s");
-		for (int i=0; i<sensors; i++) {
-			reading[i] = scan.nextInt();
-		}
-	}
-
-	public void print(){
-		for (int i=0; i<sensors; i++) {
-			System.out.print(reading[i] + " ");
-		}
-		System.out.print('\n');
-	}
-
-}
-
 class Prime{
 	public static void main(String [] args){
 		
