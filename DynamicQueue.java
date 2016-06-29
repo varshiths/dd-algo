@@ -1,5 +1,5 @@
 class DynamicQueue{
-	public int noOfSlots = 7;
+	public int noOfSlots = 2000;
 	public int noOfGestures;
 	public DynamicGesture [] gesture;
 	public int [][] dtwGap;
