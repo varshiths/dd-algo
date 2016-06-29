@@ -19,7 +19,7 @@ class Gesture{
 		System.out.println("Printing data...");
 	}
 
-	public void updateFrame(int [][] sensorLimits){
+	public void updateFrame(int [][] sensorPoint, int[] considerPoints){
 		System.out.println("Updating static frame...");
 	}
 
@@ -29,6 +29,14 @@ class Gesture{
 
 	public void updateFrame(int []fing){
 		System.out.println("Updating frame for real...");
+	}
+
+	public void updateConsider(int [] array){
+
+	}
+
+	public int getConsiderCount(){
+		return 0;
 	}
 
 	public boolean isInFrame(Live live){
